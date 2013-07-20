@@ -1,6 +1,13 @@
 $text: #222;
+$basesize: 16px;
 
-
+@mixin basegrid( $fontsize ) {
+    $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
+    line-height: $units * 1.5 * $basesize;
+    font-size: $fontsize;
+    margin-bottom: 1.5 * $basesize;
+    margin-top: ($units * 1.5 * $basesize) - 1.5*$fontsize;
+}
 
 // OH GOD THE HORROR
 // Because sassc doesn't like a %
@@ -31,16 +38,35 @@ body {
     font-size: 120%;
     margin: 0 auto;
     width: 95%;
-
+    font-size: $basesize;
+    line-height: 1.5;
 }
+
+h1 {
+    // font-size: 3rem;
+    // margin-bottom: 4.5rem;
+    @include basegrid(48px);
+}
+
+h2 {
+    font-size: 2.2em;
+}
+
+
+
+
+
+
 
 #topbar {
     width: 100%;
     position: fixed;
     top: 0;
+    left: 0;
     background: white;
-
+    padding: 0;
     height: 40px;
+
     a {
         @extend .menulink;
         width: 40px;
@@ -48,13 +74,24 @@ body {
         line-height: 40px;
         text-align: center;
         cursor: pointer;
-
     }
 
     p {
         padding-left: 45px;
         line-height: 40px;
+        padding-right: 70px;
         margin: 0;
+    }
+
+    .unread {
+        position: absolute;
+        width: 70px;
+        display: block;
+        line-height: 40px;
+        padding-right: 2.5%;
+        text-align: right;
+        top: 0;
+        right: 0;
     }
 
 }
@@ -92,12 +129,15 @@ body {
 }
 
 
-
-
 #content {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
+.article-title, .byline {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
 
 
@@ -106,13 +146,43 @@ body {
 
 // Begin tablet up
 @media only screen and (min-width: 768px) {
+    body {
+        background: red;
+    }
+    #topbar {
+        .unread::before {
+            content: 'Unreads: ';
+            position: absolute;
+            right: 70px;
 
+        }
+    }
 }
 // Begin desktop up
 @media only screen and (min-width: 1024px) {
+    body {
+        background: green;
+        max-width: 1024px;
+    }
+    #topbar .row {
+        max-width: 1024px;
+        margin: 0 auto;
 
+    }
 }
 // Begin really wide
 @media only screen and (min-width: 1440px) {
-
+    body {
+        background: purple;
+    }
 }
+
+
+// Heights
+@media only screen and (min-height: 650px) {
+    #content {
+        margin-top: 70px;
+    }
+}
+
+
