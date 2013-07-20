@@ -1,0 +1,15 @@
+{% extends "cape_shell.html" %}
+{% load staticfiles %}
+
+{% block title %}{% block page-title %}SET A PAGE TITLE{% endblock %}{% endblock %}
+
+{% block head-css %}
+<link rel='stylesheet' type='text/css' href='{% static "css/base.css" %}'>
+{% endblock %}
+
+{% block body-sheath %}
+<div id='content'>
+  {% block content %}
+  {% endblock %}
+</div>
+{% endblock %}
