@@ -6,6 +6,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
+from lib.urlattr import UrlAttr, UrlAttrMixin
+
 
 feedparser._HTMLSanitizer.acceptable_elements.add('iframe')
 
@@ -68,7 +70,7 @@ class Feed(models.Model):
         return self.name
 
 
-class Article(models.Model):
+class Article(models.Model, UrlAttrMixin):
     published = models.DateTimeField()
     updated = models.DateTimeField(null=True, blank=True)
     guid = models.TextField()
@@ -139,6 +141,10 @@ class Article(models.Model):
     
     class Meta:
         ordering = ('-updated',)
+
+    url = UrlAttr(
+        default='article-detail=',
+    )
 
     def __unicode__(self):
         return u"%s@%s" % (self.guid, unicode(self.feed))
