@@ -28,6 +28,27 @@ class Feed(models.Model):
     last_contents = models.TextField(null=True, blank=True)
     labels = models.ManyToManyField(Label, null=True, blank=True, related_name='feeds')
 
+    _parsed_contents = None
+    
+    @property
+    def parsed_contents(self):
+        if self._parsed_contents is None:
+            self._parsed_contents = feedparser.parse(self.last_contents)
+        return self._parsed_contents
+
+    def authors(self):
+        feed = self.parsed_contents.get('feed', {})
+        if 'authors' in feed:
+            return feed['authors']
+        elif 'author_detail' in feed:
+            return [feed['author_detail']]
+        elif 'author' in feed:
+            return [{
+                'name': feed['author'],
+            }]
+        else:
+            return []
+
     def _make_articles(self):
         """Create or update Article objects from entries in last_contents."""
         try:
@@ -101,7 +122,7 @@ class Article(models.Model, UrlAttrMixin):
                 'name': self.entry['author'],
             }]
         else:
-            return []
+            return self.feed.authors()
 
     def body(self):
         candidates = []
