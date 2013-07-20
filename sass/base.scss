@@ -3,6 +3,7 @@ $basesize: 16px;
 
 @mixin basegrid( $fontsize ) {
     $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
+    @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
     line-height: $units * 1.5 * $basesize;
     font-size: $fontsize;
     margin-bottom: 1.5 * $basesize;
@@ -37,33 +38,30 @@ body {
     font-family: Freesans, Helmet, sans-serif;
     font-size: 120%;
     margin: 0 auto;
-    width: 95%;
+    width: 100%;
+    padding: 0 40px;
     font-size: $basesize;
     line-height: 1.5;
 }
 
 h1 {
-    // font-size: 3rem;
-    // margin-bottom: 4.5rem;
     @include basegrid(48px);
 }
 
 h2 {
-    font-size: 2.2em;
+    @include basegrid(35px);
 }
 
-
-
-
-
-
+p {
+    @include basegrid($basesize);
+}
 
 #topbar {
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    background: white;
+
     padding: 0;
     height: 40px;
 
@@ -81,6 +79,7 @@ h2 {
         line-height: 40px;
         padding-right: 70px;
         margin: 0;
+        display: none;
     }
 
     .unread {
@@ -135,8 +134,6 @@ h2 {
 
 .article-title, .byline {
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
 
