@@ -1,14 +1,21 @@
 $text: #222;
 $basesize: 16px;
 
-@mixin basegrid( $fontsize ) {
-    $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
-    @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
-    line-height: $units * 1.5 * $basesize;
-    font-size: $fontsize;
-    margin-bottom: 1.5 * $basesize;
-    margin-top: ($units * 1.5 * $basesize) - 1.5*$fontsize;
-}
+// @mixin basegrid( $fontsize, $border: 0px ) {
+//     $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
+//     @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
+//     line-height: $units * 1.5 * $basesize;
+//     font-size: $fontsize;
+//     @if $border != 0 {
+//         margin-bottom: (1.5 * $basesize) - $border;
+//         border-bottom: $border solid black;
+
+//     } @else {
+//         margin-bottom: 1.5 * $basesize;
+
+//     }
+//     margin-top: ($units * 1.5 * $basesize) - 1.5*$fontsize;
+// }
 
 // OH GOD THE HORROR
 // Because sassc doesn't like a %
@@ -30,31 +37,54 @@ $basesize: 16px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+}
 // General CSS
 html {
     margin: 0;
 }
 body {
     font-family: Freesans, Helmet, sans-serif;
-    font-size: 120%;
+    font-size: 75%;
     margin: 0 auto;
     width: 100%;
     padding: 0 40px;
-    font-size: $basesize;
-    line-height: 1.5;
+
 }
 
-h1 {
-    @include basegrid(48px);
-}
-
-h2 {
-    @include basegrid(35px);
+html>body {
+    font-size: 16px;
 }
 
 p {
-    @include basegrid($basesize);
+    line-height: 1.5em;
+    font-size:1em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
+
+h1 {
+    // @include basegrid(48px);
+    font-size:1.5em;
+    line-height: 1em;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+h2 {
+    // @include basegrid(35px);
+    // The asymmetrical thing
+    font-size:1.1667em;
+    line-height: 1.286em;
+    margin-top: 1.929em;
+    margin-bottom: 0.643em;
+}
+
+// p {
+//     @include basegrid($basesize);
+// }
 
 #topbar {
     width: 100%;
@@ -88,6 +118,7 @@ p {
         display: block;
         line-height: 40px;
         padding-right: 2.5%;
+        font-size: 12px;
         text-align: right;
         top: 0;
         right: 0;
@@ -136,7 +167,22 @@ p {
     text-align: center;
 }
 
-
+#article-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        line-height: 1.5em;
+        font-size:1em;
+        margin-top: 1.5em;
+        padding-bottom: 1em;
+        margin-bottom: 0.5em;
+        border-bottom: 1px solid black;
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+}
 
 
 // Begin mobile
@@ -147,11 +193,13 @@ p {
         background: red;
     }
     #topbar {
-        .unread::before {
-            content: 'Unreads: ';
-            position: absolute;
-            right: 70px;
+        .unread {
 
+            &::before {
+                content: 'Unreads: ';
+                position: absolute;
+                right: 70px;
+            }
         }
     }
 }
