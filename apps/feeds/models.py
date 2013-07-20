@@ -123,5 +123,8 @@ class Article(models.Model):
 
         return content
     
+    class Meta:
+        ordering = ('-updated',)
+
     def __unicode__(self):
         return u"%s@%s" % (self.guid, unicode(self.feed))
