@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'apps.feeds',
+    'lib.common',
 )
 
 MIDDLEWARE_CLASSES = (
