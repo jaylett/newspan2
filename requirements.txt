@@ -3,3 +3,4 @@ South==0.8.1
 libsass==0.2.4
 wsgiref==0.1.2
 psycopg2==2.5.1
+feedparser==5.1.3
