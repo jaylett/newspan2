@@ -7,7 +7,7 @@
 
 <ol>
 {% for article in object_list %}
-<li>{{article.title}}</li>
+<li>{% include "feeds/_article_mark_read_and_goto.html" %}</li>
 {% endfor %}
 </ol>
 
