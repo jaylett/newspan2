@@ -74,6 +74,8 @@ class Article(models.Model):
     guid = models.TextField()
     feed = models.ForeignKey(Feed, related_name='articles')
     as_json = models.TextField()
+    starred = models.BooleanField(default=False, help_text='Starred by the HUMAN')
+    unread = models.BooleanField(default=True, help_text='Unread by the HUMAN')
 
     _as_dict = None
     
