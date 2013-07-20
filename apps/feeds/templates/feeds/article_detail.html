@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page-title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ article.title }}</h1>
+
+{% if article.authors|length %}
+<p class='byline'>by
+{% for author in article.authors %}
+{% if author.href %}{% if not forloop.first %}{% if forloop.last %}and{% else %},{% endif %} {% endif %}<a href='{{ author.href }}'>{{ author.name }}</a>{% else %}{{ author.name }}{% endif %}
+{% endfor %}
+</p>
+{% endif %}
+
+{% with body=article.body %}
+<div class='body' lang='{{ body.language }}'>{{ body.value }}</div>
+{% endwith %}
+{% endblock %}

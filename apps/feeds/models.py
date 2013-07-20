@@ -4,6 +4,10 @@ import json
 import time
 from django.db import models
 from django.utils import timezone
+from django.utils.safestring import mark_safe
+
+
+feedparser._HTMLSanitizer.acceptable_elements.add('iframe')
 
 
 class Label(models.Model):
@@ -69,6 +73,55 @@ class Article(models.Model):
     guid = models.TextField()
     feed = models.ForeignKey(Feed, related_name='articles')
     as_json = models.TextField()
+
+    _as_dict = None
+    
+    @property
+    def entry(self):
+        if self._as_dict is None:
+            self._as_dict = json.loads(self.as_json)
+        return self._as_dict
+
+    def title(self):
+        # may be HTML or text...
+        return mark_safe(self.entry['title'])
+
+    def authors(self):
+        if 'authors' in self.entry:
+            return self.entry['authors']
+        elif 'author_detail' in self.entry:
+            return [self.entry['author_detail']]
+        elif 'author' in self.entry:
+            return [{
+                'name': self.entry['author'],
+            }]
+        else:
+            return []
+
+    def body(self):
+        candidates = []
+        def is_viable(content):
+            if content['type'] in ['text', 'html', 'xhtml']:
+                return True
+            if content['type'].startswith('text/'):
+                return True
+            return False
+        candidates = filter(is_viable, self.entry['content'])
+        for candidate in candidates:
+            if candidate['type'] == 'text' or candidate['type'].startswith('text/'):
+                candidate['_SCORE'] = 1
+            elif candidate['type'] in ['html', 'xhtml']:
+                candidate['_SCORE'] = 2
+        candidates.sort(key=lambda x: x['_SCORE'], reverse=True)
+        if len(candidates) > 0:
+            content = candidates[0]
+        else:
+            content = entry['summary_detail']
+
+        if content['type'] in ['html', 'xhtml', 'text/html', 'application/xhtml+xml']:
+            content['value'] = mark_safe(content['value'])
+
+        return content
     
     def __unicode__(self):
         return u"%s@%s" % (self.guid, unicode(self.feed))
