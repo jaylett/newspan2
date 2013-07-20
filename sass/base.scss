@@ -1,6 +1,27 @@
+$text: #222;
+
+
+
+// OH GOD THE HORROR
+// Because sassc doesn't like a %
+.menulink {
+    color: $text;
+    text-decoration: none;
+    display: block;
+    &:visited {
+        color: $text;
+
+    }
+}
+
 
 @import "normalize";
 
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 // General CSS
 html {
     margin: 0;
@@ -13,34 +34,69 @@ body {
 
 }
 
-#offcanvas {
-    width: 85%;
+#topbar {
+    width: 100%;
     position: fixed;
-    transition: all 0.3s ease;
-    left: calc(-85%-1px);
-    background: white;
-    border-right: 1px solid black;
     top: 0;
-    &.present {
-        left: 0;
+    background: white;
 
-        transition: all 0.16s ease;
+    height: 40px;
+    a {
+        @extend .menulink;
+        width: 40px;
+        position: absolute;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+
     }
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
 
+    p {
+        padding-left: 45px;
+        line-height: 40px;
+        margin: 0;
+    }
+
+}
+
+#menu {
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
         a {
-            display: block;
+            @extend .menulink;
             padding: 0 15px;
             line-height: 2em;
         }
+    }
 
+    &.hasJs {
+        ul {
+            width: 85%;
+            position: fixed;
+            transition: all 0.3s ease;
+            left: -85%;
+            top: 40px;
+            background: white;
+            border-right: 1px solid black;
+        }
+
+        &.present {
+            ul {
+                left: 0;
+                transition: all 0.16s ease;
+            }
+        }
     }
 }
 
 
+
+
+#content {
+    margin-top: 40px;
+}
 
 
 

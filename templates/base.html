@@ -8,17 +8,21 @@
 {% endblock %}
 
 {% block body-sheath %}
-<div id="offcanvas">
+<div id="topbar">
+  <a href="#menu">&Xi;</a>
+  <p>Newsp(a|u)n</p>
+</div>
+<div id='content'>
+  {% block content %}
+  {% endblock %}
+</div>
+<div id="menu">
   <ul>
     <li><a href="">link</a></li>
     <li><a href="">link</a></li>
     <li><a href="">link</a></li>
     <li><a href="">link</a></li>
   </ul>
-</div>
-<div id='content'>
-  {% block content %}
-  {% endblock %}
 </div>
 {% endblock %}
 
