@@ -1,4 +1,62 @@
+
+@import "normalize";
+
+// General CSS
+html {
+    margin: 0;
+}
 body {
     font-family: Freesans, Helmet, sans-serif;
     font-size: 120%;
+    margin: 0 auto;
+    width: 95%;
+
+}
+
+#offcanvas {
+    width: 85%;
+    position: fixed;
+    transition: all 0.3s ease;
+    left: calc(-85%-1px);
+    background: white;
+    border-right: 1px solid black;
+    top: 0;
+    &.present {
+        left: 0;
+
+        transition: all 0.16s ease;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        a {
+            display: block;
+            padding: 0 15px;
+            line-height: 2em;
+        }
+
+    }
+}
+
+
+
+
+
+
+
+// Begin mobile
+
+// Begin tablet up
+@media only screen and (min-width: 768px) {
+
+}
+// Begin desktop up
+@media only screen and (min-width: 1024px) {
+
+}
+// Begin really wide
+@media only screen and (min-width: 1440px) {
+
 }
