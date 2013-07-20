@@ -56,11 +56,12 @@ class Feed(models.Model):
                     print "erm?"
                     import traceback
                     traceback.print_exc()
-            self.last_update = timezone.now()
+            self.last_updated = timezone.now()
             self.last_error = None
             self.save()
         except Exception as e:
             self.last_error = str(e)
+            self.save()
             raise
 
     def __unicode__(self):
