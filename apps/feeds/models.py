@@ -102,7 +102,7 @@ class Article(models.Model):
     def body(self):
         candidates = []
         def is_viable(content):
-            if content['type'] in ['text', 'html', 'xhtml']:
+            if content['type'] in ['text', 'html', 'xhtml', 'application/xhtml+xml', ]:
                 return True
             if content['type'].startswith('text/'):
                 return True
@@ -111,13 +111,24 @@ class Article(models.Model):
         for candidate in candidates:
             if candidate['type'] == 'text' or candidate['type'].startswith('text/'):
                 candidate['_SCORE'] = 1
-            elif candidate['type'] in ['html', 'xhtml']:
+            elif candidate['type'] in ['html', 'xhtml', 'text/html', 'application/xhtml+xml']:
                 candidate['_SCORE'] = 2
         candidates.sort(key=lambda x: x['_SCORE'], reverse=True)
+
+        content = None
+
         if len(candidates) > 0:
             content = candidates[0]
-        else:
-            content = entry['summary_detail']
+        elif 'summary_detail' in self.entry:
+            content = self.entry['summary_detail']
+        elif 'summary' in self.entry:
+            content = {
+                'value': self.entry['summary'],
+                'type': 'html', # probably?
+            }
+
+        if content is None:
+            return None
 
         if content['type'] in ['html', 'xhtml', 'text/html', 'application/xhtml+xml']:
             content['value'] = mark_safe(content['value'])
