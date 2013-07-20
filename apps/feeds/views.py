@@ -20,10 +20,9 @@ class ArticleDetail(DetailView):
         return HttpResponseRedirect(obj.url.default)
 
 
-class ArticleList(ListView):
-    model = Article
+class ArticleFilterMixin(object):
 
-    def get_queryset(self):
+    def get_filtered_set(self):
         filtparms = {}
         params = self.kwargs.get('path_params')
         _kwargs = {}
@@ -51,3 +50,25 @@ class ArticleList(ListView):
             filtparms['unread'] = True
         
         return Article.objects.filter(**filtparms)
+
+
+class ArticleList(ArticleFilterMixin, ListView):
+    model = Article
+
+    def get_queryset(self):
+        return self.get_filtered_set()
+
+
+class FeedDetail(ArticleFilterMixin, DetailView):
+    model = Feed
+
+    def get_filtered_set(self):
+        queryset = super(FeedDetail, self).get_filtered_set()
+        return queryset.filter(feed=self.object)
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'object_list': self.get_filtered_set(),
+        }
+        kwargs.update(context)
+        return super(FeedDetail, self).get_context_data(**context)
