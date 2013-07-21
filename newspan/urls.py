@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', apps.feeds.views.LabelList.as_view()),
+    url(r'^$', apps.feeds.views.LabelList.as_view(), name='home'),
     url(r'^all(?P<path_params>;[.;=,\w\d\-\_]*)?/$', apps.feeds.views.ArticleList.as_view()),
     url(r'^feed/(?P<pk>[0-9]+)(?P<path_params>;[.;=,\w\d\-\_]*)?/$', apps.feeds.views.FeedDetail.as_view(), name='feed-detail'),
     url(r'^label/(?P<pk>[0-9]+)(?P<path_params>;[.;=,\w\d\-\_]*)?/$', apps.feeds.views.LabelDetail.as_view(), name='label-detail'),
