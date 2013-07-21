@@ -6,6 +6,7 @@
 <h1>Here are your articles for {{ feed.name }}.</h1>
 
 {% include "feeds/_read_all_button.html" %}
+{% include "feeds/_stream_filter_buttons.html" %}
 
 <ol id="article-list">
   {% for article in object_list %}

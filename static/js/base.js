@@ -1,7 +1,6 @@
 (function($) {
     var body = $('body'),
         menu = $('#menu'),
-        backOne = menu.find('.backone'),
         topbar = $('#topbar'),
         isTouch = function () {
 
@@ -109,6 +108,10 @@
                 }
             });
         };
+
+
+
+
 
     menu.addClass('hasJs');
 
