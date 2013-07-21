@@ -13,9 +13,10 @@
 </p>
 {% endif %}
 
-<ul>
-  <li>{% if article.unread %}UNREAD{% else %}READ{% endif %} {% include "feeds/_article_unread_button.html" %}</li>
-  <li>{% if article.starred %}STARRED{% else %}UNSTARRED{% endif %} {% include "feeds/_article_starred_button.html" %}</li>
+<h2 class='assistive-text'>Article status</h2>
+<ul id='status' class='status'>
+  <li>{% include "feeds/_article_unread_button.html" %}</li>
+  <li>{% include "feeds/_article_starred_button.html" %}</li>
 </ul>
 
 {% with body=article.body %}

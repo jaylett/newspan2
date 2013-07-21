@@ -16,6 +16,15 @@ $basesize: 16px;
     }
     margin-top: ($units * 1.5 * $basesize) - 1.5*$fontsize;
 }
+@mixin contain-floats {
+    &:after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+    
+    _zoom: 1;
+}
 
 // OH GOD THE HORROR
 // Because sassc doesn't like a %
@@ -56,6 +65,11 @@ body {
 
 html>body {
     font-size: 16px;
+}
+
+.assistive-text {
+    position: absolute;
+    left: -9999px;
 }
 
 p {
@@ -249,5 +263,18 @@ iframe, img {
     }
 }
 
-
-
+ul.status {
+    @include contain-floats;
+    
+    li {
+        list-style: none;
+        min-width: 2em;
+    }
+    button {
+        border: none;
+        background: transparent;
+        font-size: 1.5em;
+        line-height: 1em;
+        float: left;
+    }
+}
