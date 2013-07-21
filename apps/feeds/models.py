@@ -126,6 +126,9 @@ class Article(models.Model, UrlAttrMixin):
         # may be HTML or text...
         return mark_safe(self.entry['title'])
 
+    def link(self):
+        return self.entry['link']
+
     def authors(self):
         if 'authors' in self.entry and len(self.entry['authors']) and self.entry['authors'][0]!={}:
             return self.entry['authors']

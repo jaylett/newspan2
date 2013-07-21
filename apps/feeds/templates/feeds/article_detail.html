@@ -3,7 +3,7 @@
 {% block page-title %}{{ article.title }}{% endblock %}
 
 {% block content %}
-<h1 class="article-title">{{ article.title }}</h1>
+<h1 class="article-title"><a class='original-link' target='_blank' href='{{ article.link }}'>{{ article.title }}</a></h1>
 
 {% if article.authors|length %}
 <p class='byline'>by
