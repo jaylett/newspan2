@@ -183,7 +183,14 @@ h2 {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    
     li {
+        padding-left: 3em;
+        border-bottom: 1px solid black;
+        &:last-of-type {
+            border-bottom: none;
+        }
+        
         button {
             background: transparent;
             border: none;
@@ -197,9 +204,22 @@ h2 {
             padding-bottom: 1em;
             margin-bottom: 0.5em;
         }
-        border-bottom: 1px solid black;
-        &:last-of-type {
-            border-bottom: none;
+        &.unread form.goto button {
+            font-weight: bold;
+        }
+        form.article button {
+            float: left;
+            margin-left: -3em;
+            width: auto;
+            line-height: 1;
+            padding: 0;
+        }
+        form.article.starred button {
+            margin-top: -0.5em;
+        }
+        form.article.unread button {
+            margin-top: 1em;
+            margin-left: -2.8em;
         }
     }
 }

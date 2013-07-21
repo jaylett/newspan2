@@ -8,8 +8,12 @@
 {% include "feeds/_read_all_button.html" %}
 
 <ol id="article-list">
-    {% for article in object_list %}
-        <li class="{% if article.unread %} unread{% endif %}{% if article.starred %} starred{% endif %}">{% include "feeds/_article_mark_read_and_goto.html" %}</li>
-    {% endfor %}
+  {% for article in object_list %}
+    <li class="{% if article.unread %} unread{% endif %}{% if article.starred %} starred{% endif %}">
+      {% include "feeds/_article_unread_button.html" %}
+      {% include "feeds/_article_starred_button.html" %}
+      {% include "feeds/_article_mark_read_and_goto.html" %}
+    </li>
+  {% endfor %}
 </ol>
 {% endblock %}
