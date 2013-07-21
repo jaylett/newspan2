@@ -46,41 +46,10 @@
         unreadField = $('ul#status form.unread input[name="read"]'),
         starredField = $('ul#status form.starred input[name="starred"]'),
         unreadButton = $('ul#status form.unread button'),
-        starredButton = $('ul#status form.starred button');
-
-    menu.addClass('hasJs');
-
-
-
-    backOne.on('click', function (event) {
-        event.preventDefault();
-        window.history.back();
-    });
-
-    topbar.on('click', function (event) {
-        event.preventDefault();
-        menu.toggleClass('present');
-    });
-
-    if(isTouch()) {
-        body.on('swiperight', function (event) {
-            menu.addClass('present');
-
-        }).on('swipeleft', function (event) {
-            if(menu.hasClass('present')) {
-                menu.removeClass('present');
-            } else {
-                window.location.href = 'http://localhost:8000/';
-            }
-        });
-    }
-
-    // keyboard shortcuts
-    // FIXME should be ajaxified
-    body.on('keypress', function (event) {
-        if ( event.which == 109 ) {         // [m]
-            // $('ul#status form.unread button').click();
-
+        starredButton = $('ul#status form.starred button'),
+        nextArticle = $('form.next-article'),
+        nextLink = window.location.protocol + '//' + window.location.host + nextArticle.attr('action'),
+        toggleUnread = function () {
             $.ajaxSetup({
                 crossDomain: false, // obviates need for sameOrigin test
                 beforeSend: function(xhr, settings) {
@@ -109,9 +78,8 @@
 
                 }
             });
-        }
-        else if ( event.which == 115 ) {    // [s]
-            // $('ul#status form.starred button').click();
+        },
+        toggleStarred = function() {
             $.ajaxSetup({
                 crossDomain: false, // obviates need for sameOrigin test
                 beforeSend: function(xhr, settings) {
@@ -135,11 +103,51 @@
                     // starredField.val( !starredField.val() );
                     console.log( starredField.val() );
 
-                    var star = (starredField.val()=="true")?'★':'☆';
+                    var star = (starredField.val()=="true")?'☆':'★';
                     starredButton.text(star);
 
                 }
             });
+        };
+
+    menu.addClass('hasJs');
+
+    console.log(nextLink);
+
+    backOne.on('click', function (event) {
+        event.preventDefault();
+        window.history.back();
+    });
+
+    topbar.on('click', function (event) {
+        event.preventDefault();
+        menu.toggleClass('present');
+    });
+
+    if(isTouch()) {
+        body.on('swiperight', function (event) {
+            menu.addClass('present');
+
+        }).on('swipeleft', function (event) {
+            if(menu.hasClass('present')) {
+                menu.removeClass('present');
+            } else {
+                window.location.href = nextLink;
+            }
+        });
+    }
+
+    // keyboard shortcuts
+    // FIXME should be ajaxified
+    body.on('keypress', function (event) {
+        if ( event.which == 109 ) {         // [m]
+            // $('ul#status form.unread button').click();
+
+            toggleUnread();
+        }
+        else if ( event.which == 115 ) {    // [s]
+            // $('ul#status form.starred button').click();
+            toggleStarred();
         }
         else if ( event.which == 65 ) {     // shift+[a]
             $('ul#status form.read-all button').click();
@@ -150,5 +158,13 @@
         else {
             console.log('key code: ' + event.which);
         }
+    });
+
+    body.on('click', 'ul#status form.unread button', function (event) {
+        event.preventDefault();
+        toggleUnread();
+    }).on('click', 'ul#status form.starred button', function (event) {
+        event.preventDefault();
+        toggleStarred();
     });
 }(jQuery));

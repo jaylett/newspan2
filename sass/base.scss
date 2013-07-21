@@ -276,6 +276,18 @@ iframe, img {
     }
 }
 
+
+.next-article button {
+    background: transparent;
+    border: none;
+    padding: 0px;
+    @include basegrid(20px);
+    text-align: left;
+}
+.bold {
+    font-weight: bold;
+}
+
 // Begin tablet up
 @media only screen and (min-width: 768px) {
     body {

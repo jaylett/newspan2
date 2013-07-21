@@ -24,7 +24,8 @@
 {% endwith %}
 
 {% if next_article %}
-Read this next: {{ next_article.title }} {{ base_url }}article/{{ next_article.pk }}/
+<p class="bold">Read this next:</p>
+<!-- {{ next_article.title }} {{ base_url }}article/{{ next_article.pk }}/ -->
 {% with article=next_article %}
 {% include "feeds/_article_mark_read_and_goto.html" %}
 {% endwith %}
