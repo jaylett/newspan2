@@ -5,7 +5,7 @@
 {% block content %}
 <h1>All your labels (and unlabelled feeds)</h1>
 
-<ol>
+<ol id="feedlist">
     {% for label in object_list %}
         <li><a href='{{ label.url }}'>{{ label.name }}</a>
             <ol>
