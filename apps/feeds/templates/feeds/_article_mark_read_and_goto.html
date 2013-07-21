@@ -1,2 +1,2 @@
 
-<form method='POST' action='{{ base_url }}article/{{ article.pk }}/' class='goto'>{% csrf_token %}<input type='hidden' name='read' value='true'><button type='submit'>{{ article.title }}</button></form>
+<form method='POST' action='{{ base_url }}article/{{ article.pk }}/' class='goto'>{% csrf_token %}<input type='hidden' name='read' value='true'><button type='submit'>{{ article.title }} &rarr;</button></form>

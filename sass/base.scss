@@ -188,14 +188,14 @@ h2 {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    
+
     li {
         padding-left: 3em;
         border-bottom: 1px solid black;
         &:last-of-type {
             border-bottom: none;
         }
-        
+
         button {
             background: transparent;
             border: none;
@@ -245,7 +245,7 @@ iframe, img {
 #feedlist {
     list-style-type: none;
     counter-reset: feedlist;
-    li {
+    &>li {
         position: relative;
         padding-left: 60px;
         margin-bottom: 16px;
@@ -277,7 +277,7 @@ iframe, img {
 }
 
 
-.next-article button {
+.goto button {
     background: transparent;
     border: none;
     padding: 0px;

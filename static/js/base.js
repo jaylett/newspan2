@@ -46,7 +46,7 @@
         starredField = $('ul#status form.starred input[name="starred"]'),
         unreadButton = $('ul#status form.unread button'),
         starredButton = $('ul#status form.starred button'),
-        nextArticle = $('form.next-article'),
+        nextArticle = $('form.goto'),
         nextLink = window.location.protocol + '//' + window.location.host + nextArticle.attr('action'),
         toggleUnread = function () {
             $.ajaxSetup({
@@ -117,10 +117,7 @@
 
     console.log(nextLink);
 
-    backOne.on('click', function (event) {
-        event.preventDefault();
-        window.history.back();
-    });
+
 
     topbar.on('click', function (event) {
         event.preventDefault();
