@@ -28,7 +28,7 @@ class MarkArticleMixin(object):
             update['starred'] = (set_starred == 'true')
         obj = self.get_article_object()
         Article.objects.filter(pk=obj.pk).update(**update)
-        next = request.POST.get('next', obj.url.default)
+        next = request.POST.get('next', request.get_full_path())
         return HttpResponseRedirect(next)
 
 
@@ -101,6 +101,9 @@ class ArticleList(ArticleFilterMixin, ListView):
     def get_context_data(self, **kwargs):
         context = {
             'base_url': '/all' + self.path_params + '/',
+            'unread_url': '/all/',
+            'starred_url': '/all;show=starred/',
+            'all_url': '/all;show=all/',
         }
         context.update(kwargs)
         return super(ArticleList, self).get_context_data(**context)
@@ -117,6 +120,9 @@ class FeedDetail(ArticleFilterMixin, DetailView):
         context = {
             'object_list': self.get_filtered_set(),
             'base_url': '/feed/' + str(self.object.pk) + self.path_params + '/',
+            'unread_url': '/feed/' + str(self.object.pk) + '/',
+            'starred_url': '/feed/' + str(self.object.pk) + ';show=starred/',
+            'all_url': '/feed/' + str(self.object.pk) + ';show=all/',
         }
         context.update(kwargs)
         return super(FeedDetail, self).get_context_data(**context)
@@ -133,6 +139,9 @@ class LabelDetail(ArticleFilterMixin, DetailView):
         context = {
             'object_list': self.get_filtered_set(),
             'base_url': '/label/' + str(self.object.pk) + self.path_params + '/',
+            'unread_url': '/label/' + str(self.object.pk) + '/',
+            'starred_url': '/label/' + str(self.object.pk) + ';show=starred/',
+            'all_url': '/label/' + str(self.object.pk) + ';show=all/',
         }
         context.update(kwargs)
         return super(LabelDetail, self).get_context_data(**context)

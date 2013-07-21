@@ -22,7 +22,9 @@
 <div id="menu">
   <ul>
     <li><a href="{% url 'home' %}">Home</a></li>
-    <li><a rel="back" class="backone" href="">Back to Article List</a></li>
+    {% if base_url and base_url != request.get_full_path %}
+      <li><a rel="back" class="backone" href="{{ base_url }}">Back to Article List</a></li>
+    {% endif %}
     <!-- <li><a href="">link</a></li>
     <li><a href="">link</a></li> -->
   </ul>

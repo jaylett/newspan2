@@ -1,0 +1,11 @@
+<ul class='filters'>
+  <li{% if request.get_full_path == unread_url %} class='selected'{% endif %}>
+    <a href='{{ unread_url }}'>Unread</a>
+  </li>
+  <li{% if request.get_full_path == starred_url %} class='selected'{% endif %}>
+    <a href='{{ starred_url }}'>Starred</a>
+  </li>
+  <li{% if request.get_full_path == all_url %} class='selected'{% endif %}>
+    <a href='{{ all_url }}'>All</a>
+  </li>
+</ul>

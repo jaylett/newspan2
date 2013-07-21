@@ -1,7 +1,6 @@
 (function($) {
     var body = $('body'),
         menu = $('#menu'),
-        backOne = menu.find('.backone'),
         topbar = $('#topbar'),
         isTouch = function () {
 
@@ -51,11 +50,6 @@
     menu.addClass('hasJs');
 
 
-
-    backOne.on('click', function (event) {
-        event.preventDefault();
-        window.history.back();
-    });
 
     topbar.on('click', function (event) {
         event.preventDefault();
