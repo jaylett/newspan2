@@ -12,6 +12,9 @@ urlpatterns = patterns(
     url(r'^all(?P<path_params>;[.;=,\w\d\-\_]*)?/$', apps.feeds.views.ArticleList.as_view()),
     url(r'^feed/(?P<pk>[0-9]+)(?P<path_params>;[.;=,\w\d\-\_]*)?/$', apps.feeds.views.FeedDetail.as_view(), name='feed-detail'),
     url(r'^label/(?P<pk>[0-9]+)(?P<path_params>;[.;=,\w\d\-\_]*)?/$', apps.feeds.views.LabelDetail.as_view(), name='label-detail'),
+    url(r'^all(?P<path_params>;[.;=,\w\d\-\_]*)?/article/(?P<article_pk>[0-9]+)/$', apps.feeds.views.ArticleInAll.as_view()),
+    url(r'^feed/(?P<pk>[0-9]+)(?P<path_params>;[.;=,\w\d\-\_]*)?/article/(?P<article_pk>[0-9]+)/$', apps.feeds.views.ArticleInFeed.as_view(), name='feed-detail'),
+    url(r'^label/(?P<pk>[0-9]+)(?P<path_params>;[.;=,\w\d\-\_]*)?/article/(?P<article_pk>[0-9]+)/$', apps.feeds.views.ArticleInLabel.as_view(), name='label-detail'),
     url(r'^article/(?P<pk>[0-9]+)/$', apps.feeds.views.ArticleDetail.as_view(), name='article-detail'),
     url(r'^admin/', include(admin.site.urls)),
 )

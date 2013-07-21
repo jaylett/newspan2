@@ -22,4 +22,11 @@
 {% with body=article.body %}
 <div class='body' lang='{{ body.language }}'>{{ body.value }}</div>
 {% endwith %}
+
+{% if next_article %}
+Read this next: {{ next_article.title }} {{ base_url }}article/{{ next_article.pk }}/
+{% with article=next_article %}
+{% include "feeds/_article_mark_read_and_goto.html" %}
+{% endwith %}
+{% endif %}
 {% endblock %}

@@ -175,7 +175,7 @@ class Article(models.Model, UrlAttrMixin):
         return content
     
     class Meta:
-        ordering = ('-updated',)
+        ordering = ('-updated', '-pk')
 
     url = UrlAttr(
         default='article-detail=',
