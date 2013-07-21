@@ -28,7 +28,8 @@ class ArticleDetail(DetailView):
             update['starred'] = (set_starred == 'true')
         obj = self.get_object()
         Article.objects.filter(pk=obj.pk).update(**update)
-        return HttpResponseRedirect(obj.url.default)
+        next = request.POST.get('next', obj.url.default)
+        return HttpResponseRedirect(next)
 
 
 class ArticleFilterMixin(object):
