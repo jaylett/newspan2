@@ -123,9 +123,9 @@ if AWS_AVAILABLE and 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     STATIC_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STORAGE_BUCKET_NAME']
     STATIC_ROOT = ''
 else:
-    MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'collected_static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
     STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
