@@ -1,0 +1,1 @@
+<form method='POST' action='{{ article.url }}'>{% csrf_token %}<input type='hidden' name='starred' value='{% if article.starred %}false{% else %}true{% endif %}'><button type='submit'>Mark {% if article.starred %}unstarred{% else %}starred{% endif %}</button></form>
