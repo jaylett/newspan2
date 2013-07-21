@@ -1,21 +1,21 @@
 $text: #222;
 $basesize: 16px;
 
-// @mixin basegrid( $fontsize, $border: 0px ) {
-//     $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
-//     @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
-//     line-height: $units * 1.5 * $basesize;
-//     font-size: $fontsize;
-//     @if $border != 0 {
-//         margin-bottom: (1.5 * $basesize) - $border;
-//         border-bottom: $border solid black;
+@mixin basegrid( $fontsize, $border: 0px ) {
+    $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
+    @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
+    line-height: $units * 1.5 * $basesize;
+    font-size: $fontsize;
+    @if $border != 0 {
+        margin-bottom: (1.5 * $basesize) - $border;
+        border-bottom: $border solid black;
 
-//     } @else {
-//         margin-bottom: 1.5 * $basesize;
+    } @else {
+        margin-bottom: 1.5 * $basesize;
 
-//     }
-//     margin-top: ($units * 1.5 * $basesize) - 1.5*$fontsize;
-// }
+    }
+    margin-top: ($units * 1.5 * $basesize) - 1.5*$fontsize;
+}
 
 // OH GOD THE HORROR
 // Because sassc doesn't like a %
@@ -66,20 +66,20 @@ p {
 }
 
 h1 {
-    // @include basegrid(48px);
-    font-size:1.5em;
-    line-height: 1em;
-    margin-top: 0;
-    margin-bottom: 1em;
+    @include basegrid(36px);
+    // font-size:1.5em;
+    // line-height: 1em;
+    // margin-top: 0;
+    // margin-bottom: 1em;
 }
 
 h2 {
-    // @include basegrid(35px);
+    @include basegrid(30px);
     // The asymmetrical thing
-    font-size:1.1667em;
-    line-height: 1.286em;
-    margin-top: 1.929em;
-    margin-bottom: 0.643em;
+    // font-size:1.1667em;
+    // line-height: 1.286em;
+    // margin-top: 1.929em;
+    // margin-bottom: 0.643em;
 }
 
 // p {
@@ -208,7 +208,8 @@ iframe, img {
 // Begin tablet up
 @media only screen and (min-width: 768px) {
     body {
-        // background: red;
+        background: green;
+        max-width: 688px; // 768 -80 px
     }
     #topbar {
         .unread {
@@ -227,16 +228,14 @@ iframe, img {
 }
 
 @media only screen and (min-widht: 768px) and (min-height: 650px) {
+
     #content {
         margin-top: 70px;
     }
 }
 // Begin desktop up
 @media only screen and (min-width: 1024px) {
-    body {
-        background: green;
-        max-width: 1024px;
-    }
+
     #topbar .row {
         max-width: 1024px;
         margin: 0 auto;

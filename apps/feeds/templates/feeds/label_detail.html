@@ -9,7 +9,7 @@
 
 <ol id="article-list">
 {% for article in object_list %}
-<li>{% include "feeds/_article_mark_read_and_goto.html" %}</li>
+<li class="{% if article.unread %} unread{% endif if article.starred %} starred{% endif %}">{% include "feeds/_article_mark_read_and_goto.html" %}</li>
 {% endfor %}
 </ol>
 

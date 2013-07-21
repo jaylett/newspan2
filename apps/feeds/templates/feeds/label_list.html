@@ -6,14 +6,17 @@
 <h1>All your labels (and unlabelled feeds)</h1>
 
 <ol>
-{% for label in object_list %}
-<li><a href='{{ label.url }}'>{{ label.name }}</a>
-<ol>{% for feed in label.feeds.all %}<li><a href='{{ feed.url }}'>{{ feed.name }}</a></li>{% endfor %}</ol>
-</li>
-{% endfor %}
-{% for feed in unlabelled_feeds %}
-<li><a href='{{ feed.url }}'>{{ feed.name }}</a></li>
-{% endfor %}
+    {% for label in object_list %}
+        <li><a href='{{ label.url }}'>{{ label.name }}</a>
+            <ol>
+                {% for feed in label.feeds.all %}
+                    <li><a href='{{ feed.url }}'>{{ feed.name }}</a></li>
+                {% endfor %}
+            </ol>
+        </li>
+    {% endfor %}
+    {% for feed in unlabelled_feeds %}
+        <li><a href='{{ feed.url }}'>{{ feed.name }}</a></li>
+    {% endfor %}
 </ol>
-
 {% endblock %}
