@@ -5,7 +5,8 @@ With the demise of Google Reader, everyone is making RSS readers that suck a lit
  * self-hosted RSS reader
  * labels, stars as expected
  * unlike some feed readers, we honour `xml:base`
- * keyboard shortcuts
+ * responsive layouts
+ * keyboard shortcuts and touch gestures
  * Heroku compatible
 
 ## Environment variables for Heroku
