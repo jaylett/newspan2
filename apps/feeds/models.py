@@ -12,14 +12,18 @@ from lib.urlattr import UrlAttr, UrlAttrMixin
 feedparser._HTMLSanitizer.acceptable_elements.add('iframe')
 
 
-class Label(models.Model):
+class Label(models.Model, UrlAttrMixin):
     name = models.CharField(max_length=128)
+
+    url = UrlAttr(
+        default='label-detail=',
+    )
 
     def __unicode__(self):
         return self.name
 
 
-class Feed(models.Model):
+class Feed(models.Model, UrlAttrMixin):
     name = models.TextField()
     url = models.URLField(max_length=1024)
     last_updated = models.DateTimeField(null=True, blank=True)
@@ -86,6 +90,10 @@ class Feed(models.Model):
             self.last_error = str(e)
             self.save()
             raise
+
+    url = UrlAttr(
+        default='feed-detail=',
+    )
 
     def __unicode__(self):
         return self.name
