@@ -160,7 +160,7 @@ h2 {
 
 
 #content {
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .article-title, .byline {
@@ -172,11 +172,19 @@ h2 {
     margin: 0;
     padding: 0;
     li {
-        line-height: 1.5em;
-        font-size:1em;
-        margin-top: 1.5em;
-        padding-bottom: 1em;
-        margin-bottom: 0.5em;
+        button {
+            background: transparent;
+            border: none;
+            display: block;
+            width: 100%;
+            text-align: left;
+            line-height: 1.5em;
+            font-size:1em;
+            margin-top: 1.5em;
+            padding: 0;
+            padding-bottom: 1em;
+            margin-bottom: 0.5em;
+        }
         border-bottom: 1px solid black;
         &:last-of-type {
             border-bottom: none;
@@ -184,13 +192,23 @@ h2 {
     }
 }
 
-
 // Begin mobile
+
+iframe, img {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block;
+}
+
+.feedflare img {
+    display: inline;
+}
 
 // Begin tablet up
 @media only screen and (min-width: 768px) {
     body {
-        background: red;
+        // background: red;
     }
     #topbar {
         .unread {
@@ -201,6 +219,16 @@ h2 {
                 right: 70px;
             }
         }
+    }
+
+    #content {
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (min-widht: 768px) and (min-height: 650px) {
+    #content {
+        margin-top: 70px;
     }
 }
 // Begin desktop up
@@ -222,12 +250,5 @@ h2 {
     }
 }
 
-
-// Heights
-@media only screen and (min-height: 650px) {
-    #content {
-        margin-top: 70px;
-    }
-}
 
 
