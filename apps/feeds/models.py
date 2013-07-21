@@ -38,7 +38,7 @@ class Feed(models.Model):
 
     def authors(self):
         feed = self.parsed_contents.get('feed', {})
-        if 'authors' in feed:
+        if 'authors' in feed and len(feed['authors']) and feed['authors'][0]!={}:
             return feed['authors']
         elif 'author_detail' in feed:
             return [feed['author_detail']]
@@ -113,7 +113,7 @@ class Article(models.Model, UrlAttrMixin):
         return mark_safe(self.entry['title'])
 
     def authors(self):
-        if 'authors' in self.entry:
+        if 'authors' in self.entry and len(self.entry['authors']) and self.entry['authors'][0]!={}:
             return self.entry['authors']
         elif 'author_detail' in self.entry:
             return [self.entry['author_detail']]
