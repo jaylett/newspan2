@@ -155,8 +155,14 @@
         else if ( event.which == 85 ) {     // shift+[u]
             $('ul#status form.unread-all button').click();
         }
-        else {
-            console.log('key code: ' + event.which);
+        else if ( event.which == 49 ) {     // 1
+            $('#stream-unread').get(0).click();
+        }
+        else if ( event.which == 50 ) {     // 2
+            $('#stream-starred').get(0).click();
+        }
+        else if ( event.which == 51 ) {     // 3
+            $('#stream-all').get(0).click();
         }
     });
 
