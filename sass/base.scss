@@ -3,7 +3,7 @@ $basesize: 16px;
 
 @mixin basegrid( $fontsize, $border: 0px ) {
     $units: ceil( ( $fontsize + 0.25*$basesize ) / ( 1.5*$basesize ) );
-    @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
+    // @warn "This is fontsize: #{$fontsize}, underthing: #{0.25*$basesize}and this is unit: #{$units}";
     line-height: $units * 1.5 * $basesize;
     font-size: $fontsize;
     @if $border != 0 {
@@ -24,6 +24,16 @@ $basesize: 16px;
     }
     
     _zoom: 1;
+}
+
+@mixin prettylinks() {
+    color: $text;
+    text-decoration: none;
+    display: block;
+    &:visited {
+        color: $text;
+        text-decoration: none;
+    }
 }
 
 // OH GOD THE HORROR
@@ -81,6 +91,7 @@ p {
 
 h1 {
     @include basegrid(36px);
+    text-align: center;
     // font-size:1.5em;
     // line-height: 1em;
     // margin-top: 0;
@@ -203,6 +214,8 @@ h2 {
         &:last-of-type {
             border-bottom: none;
         }
+
+
     }
 }
 
@@ -219,10 +232,44 @@ iframe, img {
     display: inline;
 }
 
+#feedlist {
+    list-style-type: none;
+    counter-reset: feedlist;
+    li {
+        position: relative;
+        padding-left: 60px;
+        margin-bottom: 16px;
+        &::before {
+            content: counter(feedlist, decimal);
+            counter-increment: feedlist;
+            display: block;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 60px;
+            height: 52px;
+            text-align: left;
+            font-size: 48px;
+            line-height: 52px;
+            font-weight: bold;
+            z-index: -1;
+        }
+        a {
+            @include prettylinks;
+            @include basegrid(24px);
+            margin-left: -60px;
+            padding-left: 60px;
+            min-height: 50px;
+            // border: 1px solid black;
+
+        }
+    }
+}
+
 // Begin tablet up
 @media only screen and (min-width: 768px) {
     body {
-        background: green;
+        // background: green;
         max-width: 688px; // 768 -80 px
     }
     #topbar {
@@ -259,7 +306,7 @@ iframe, img {
 // Begin really wide
 @media only screen and (min-width: 1440px) {
     body {
-        background: purple;
+        // background: purple;
     }
 }
 
