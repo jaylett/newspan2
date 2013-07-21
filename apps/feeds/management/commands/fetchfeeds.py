@@ -9,7 +9,7 @@ class Command(BaseCommand):
         for feed in Feed.objects.all():
             feed.last_checked = timezone.now()
             try:
-                response = urllib2.urlopen(feed.url)
+                response = urllib2.urlopen(feed.feed_url)
                 feed.last_contents = response.read()
                 feed.save()
                 feed._make_articles()

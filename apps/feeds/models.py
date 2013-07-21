@@ -24,8 +24,8 @@ class Label(models.Model, UrlAttrMixin):
 
 
 class Feed(models.Model, UrlAttrMixin):
-    url = models.URLField(max_length=1024)
     name = models.TextField(blank=True)
+    feed_url = models.URLField(max_length=1024, db_column='url')
     last_updated = models.DateTimeField(null=True, blank=True)
     last_checked = models.DateTimeField(null=True, blank=True)
     last_error = models.TextField(null=True, blank=True)
