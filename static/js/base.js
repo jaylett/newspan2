@@ -207,6 +207,9 @@
         else if ( event.which == 117 ) {     // [u]
             $('a[rel=parent]').get(0).click();
         }
+        else if ( event.which == 118 ) {     // [v]
+            $('a.original-link').get(0).click();
+        }
         else if ( event.which == 65 ) {     // shift+[a]
             $('ul#status form.read-all button').click();
         }
