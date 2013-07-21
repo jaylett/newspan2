@@ -46,7 +46,7 @@ class Feed(models.Model, UrlAttrMixin):
             return feed['authors']
         elif 'author_detail' in feed:
             return [feed['author_detail']]
-        elif 'author' in feed:
+        elif 'author' in feed and feed['author']:
             return [{
                 'name': feed['author'],
             }]
@@ -131,7 +131,7 @@ class Article(models.Model, UrlAttrMixin):
             return self.entry['authors']
         elif 'author_detail' in self.entry:
             return [self.entry['author_detail']]
-        elif 'author' in self.entry:
+        elif 'author' in self.entry and self.entry['author']:
             return [{
                 'name': self.entry['author'],
             }]
