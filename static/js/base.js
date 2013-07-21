@@ -143,7 +143,10 @@
     // keyboard shortcuts
     // FIXME should be ajaxified
     body.on('keypress', function (event) {
-        if ( event.which == 109 ) {         // [m]
+        if ( event.which == 104 ) {         // [h]
+            $('a[rel=top]').get(0).click();
+        }
+        else if ( event.which == 109 ) {    // [m]
             // $('ul#status form.unread button').click();
 
             toggleUnread();
@@ -156,19 +159,23 @@
             // $('ul#status form.starred button').click();
             gotoAndMarkUnread();
         }
+
+        else if ( event.which == 117 ) {     // [u]
+            $('a[rel=parent]').get(0).click();
+        }
         else if ( event.which == 65 ) {     // shift+[a]
             $('ul#status form.read-all button').click();
         }
         else if ( event.which == 85 ) {     // shift+[u]
             $('ul#status form.unread-all button').click();
         }
-        else if ( event.which == 49 ) {     // 1
+        else if ( event.which == 49 ) {     // [1]
             $('#stream-unread').get(0).click();
         }
-        else if ( event.which == 50 ) {     // 2
+        else if ( event.which == 50 ) {     // [2]
             $('#stream-starred').get(0).click();
         }
-        else if ( event.which == 51 ) {     // 3
+        else if ( event.which == 51 ) {     // [3]
             $('#stream-all').get(0).click();
         }
     });
