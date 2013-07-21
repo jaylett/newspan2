@@ -62,6 +62,16 @@ class ArticleFilterMixin(object):
         
         return Article.objects.filter(**filtparms)
 
+    def post(self, request, *args, **kwargs):
+        if hasattr(self, 'get_object'):
+            self.object = self.get_object()
+        set_read = self.request.POST.get('read')
+        if set_read is not None:
+            self.get_filtered_set().update(
+                unread = not (set_read == 'true'),
+            )
+        return HttpResponseRedirect(request.get_full_path())
+
 
 class ArticleList(ArticleFilterMixin, ListView):
     model = Article

@@ -5,6 +5,8 @@
 {% block content %}
 <h1>Here are your articles for {{ label.name }}.</h1>
 
+{% include "feeds/_read_all_button.html" %}
+
 <ol id="article-list">
 {% for article in object_list %}
 <li>{% include "feeds/_article_mark_read_and_goto.html" %}</li>
