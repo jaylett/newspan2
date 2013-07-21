@@ -13,6 +13,7 @@ class FeedAdmin(admin.ModelAdmin):
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
+    list_filter = ['feed', 'unread', 'starred', 'feed__labels']
 
 
 admin.site.register(Label, LabelAdmin)
