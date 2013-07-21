@@ -63,13 +63,17 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,t
 // General CSS
 html {
     margin: 0;
+    height: 100%;
 }
 body {
     font-family: Freesans, Helmet, sans-serif;
-    font-size: 75%;
+    // font-size: 75%;
     margin: 0 auto;
+
     width: 100%;
-    padding: 0 40px;
+    min-height: 100%;
+    padding: 0 40px 40px 40px;
+
 
 }
 
@@ -172,7 +176,8 @@ h2 {
 
 
 #content {
-    margin-top: 10px;
+    // margin-top: 10px;
+    padding-top: 10px;
 }
 
 .article-title, .byline {
@@ -289,7 +294,8 @@ iframe, img {
     }
 
     #content {
-        margin-top: 50px;
+        padding-top: 50px;
+        // margin-top: 50px;
     }
 }
 
@@ -311,6 +317,7 @@ iframe, img {
 // Begin really wide
 @media only screen and (min-width: 1440px) {
     body {
+
 
     }
 }
