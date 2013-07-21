@@ -72,3 +72,19 @@ class FeedDetail(ArticleFilterMixin, DetailView):
         }
         kwargs.update(context)
         return super(FeedDetail, self).get_context_data(**context)
+
+
+class LabelDetail(ArticleFilterMixin, DetailView):
+    model = Label
+
+    def get_filtered_set(self):
+        queryset = super(LabelDetail, self).get_filtered_set()
+        return queryset.filter(feed__labels=self.object).distinct()
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'object_list': self.get_filtered_set(),
+        }
+        kwargs.update(context)
+        return super(LabelDetail, self).get_context_data(**context)
+
