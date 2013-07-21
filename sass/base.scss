@@ -245,7 +245,14 @@ iframe, img {
 #feedlist {
     list-style-type: none;
     counter-reset: feedlist;
+    li {
+        &.sel > a {
+            // border: 1px solid black;
+            font-weight: bold;
+        }
+    }
     &>li {
+
         position: relative;
         padding-left: 60px;
         margin-bottom: 16px;

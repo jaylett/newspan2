@@ -48,6 +48,8 @@
         starredButton = $('ul#status form.starred button'),
         nextArticle = $('form.goto'),
         nextLink = window.location.protocol + '//' + window.location.host + nextArticle.attr('action'),
+        feedList = $('#feedlist'),
+        feedListLi = feedList.find('li'),
         toggleUnread = function () {
             $.ajaxSetup({
                 crossDomain: false, // obviates need for sameOrigin test
@@ -111,10 +113,38 @@
         gotoAndMarkUnread = function (target) {
             var target = target || null;
             nextArticle.submit();
+        },
+        gotoLi = function (dir) {
+            console.log(dir);
+            var sel, index, all, current, next;
+
+            all = feedListLi.length;
+
+
+            // feedListLi.eq(0).addClass('sel');
+            index = 0;
+            sel = feedList.find('li.sel');
+
+
+
+            if(sel.length>0) {
+                current = feedListLi.index(sel);
+
+                next = ( (current + dir) + all ) % all;
+                console.log(next);
+
+                feedListLi.removeClass('sel').eq(next).addClass('sel');
+
+                // console.log(feedListLi.index(sel));
+            } else {
+                feedListLi.removeClass('sel').eq(0).addClass('sel');
+            }
+
         };
 
 
 
+    // gotoLi(1);
 
 
     menu.addClass('hasJs');
@@ -143,8 +173,22 @@
     // keyboard shortcuts
     // FIXME should be ajaxified
     body.on('keypress', function (event) {
+
+
+        console.log(event.which);
+
+
         if ( event.which == 104 ) {         // [h]
             $('a[rel=top]').get(0).click();
+        }
+        else if ( event.which == 106 ) {    // [j]
+            // $('ul#status form.unread button').click();
+            gotoLi(1);
+        }
+        else if ( event.which == 107 ) {    // [k]
+            // $('ul#status form.unread button').click();
+            gotoLi(-1);
+
         }
         else if ( event.which == 109 ) {    // [m]
             // $('ul#status form.unread button').click();
@@ -177,6 +221,10 @@
         }
         else if ( event.which == 51 ) {     // [3]
             $('#stream-all').get(0).click();
+        }
+        else if ( event.which == 13 ) {     // [return]
+            console.log('this is called');
+            $('#feedlist li.sel a').get(0).click();
         }
     });
 
