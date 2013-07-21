@@ -146,7 +146,7 @@ class Article(models.Model, UrlAttrMixin):
             if content['type'].startswith('text/'):
                 return True
             return False
-        candidates = filter(is_viable, self.entry['content'])
+        candidates = filter(is_viable, self.entry.get('content', []))
         for candidate in candidates:
             if candidate['type'] == 'text' or candidate['type'].startswith('text/'):
                 candidate['_SCORE'] = 1
