@@ -1,2 +1,1 @@
-web: python manage.py runserver
-sass: python manage.py watchsass
+web: gunicorn newspan.wsgi -w 8
