@@ -288,6 +288,25 @@ iframe, img {
     font-weight: bold;
 }
 
+.filters {
+    text-align: left;
+    list-style-type: none;
+    padding: 12px 6px;
+
+    li {
+        display: inline-block;
+        margin-right: 12px;
+        a {
+            @include prettylinks();
+        }
+        &.selected a {
+            font-weight: bold;
+        }
+
+    }
+}
+
+
 // Begin tablet up
 @media only screen and (min-width: 768px) {
     body {
