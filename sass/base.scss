@@ -22,7 +22,7 @@ $basesize: 16px;
         clear: both;
         display: block;
     }
-    
+
     _zoom: 1;
 }
 
@@ -92,24 +92,12 @@ p {
 h1 {
     @include basegrid(36px);
     text-align: center;
-    // font-size:1.5em;
-    // line-height: 1em;
-    // margin-top: 0;
-    // margin-bottom: 1em;
 }
 
 h2 {
     @include basegrid(30px);
-    // The asymmetrical thing
-    // font-size:1.1667em;
-    // line-height: 1.286em;
-    // margin-top: 1.929em;
-    // margin-bottom: 0.643em;
 }
 
-// p {
-//     @include basegrid($basesize);
-// }
 
 #topbar {
     width: 100%;
@@ -148,7 +136,6 @@ h2 {
         top: 0;
         right: 0;
     }
-
 }
 
 #menu {
@@ -214,8 +201,6 @@ h2 {
         &:last-of-type {
             border-bottom: none;
         }
-
-
     }
 }
 
@@ -306,13 +291,13 @@ iframe, img {
 // Begin really wide
 @media only screen and (min-width: 1440px) {
     body {
-        // background: purple;
+
     }
 }
 
 ul.status {
     @include contain-floats;
-    
+
     li {
         list-style: none;
         min-width: 2em;

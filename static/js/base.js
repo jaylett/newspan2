@@ -3,8 +3,10 @@
         menu = $('#menu'),
         topbar = $('#topbar'),
         isTouch = function () {
-          return !!('ontouchstart' in window) // works on most browsers
-              || !!('onmsgesturechange' in window); // works on ie10
+
+            // return !!('ontouchstart' in window) // works on most browsers
+            //     || !!('onmsgesturechange' in window); // works on ie10
+            return true;
         };
 
     menu.addClass('hasJs');
@@ -17,17 +19,16 @@
     if(isTouch()) {
         body.on('swiperight', function (event) {
             menu.addClass('present');
+
         }).on('swipeleft', function (event) {
-            menu.removeClass('present');
+            if(menu.hasClass('present')) {
+                menu.removeClass('present');
+            } else {
+                window.location.href = 'http://localhost:8000/';
+            }
         });
     }
 
-    body.on('swiperight', function (event) {
-        menu.addClass('present');
-    }).on('swipeleft', function (event) {
-        menu.removeClass('present');
-    });
-    
     // keyboard shortcuts
     // FIXME should be ajaxified
     body.on('keypress', function (event) {
