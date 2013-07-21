@@ -24,8 +24,8 @@ class Label(models.Model, UrlAttrMixin):
 
 
 class Feed(models.Model, UrlAttrMixin):
-    name = models.TextField()
     url = models.URLField(max_length=1024)
+    name = models.TextField(blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
     last_checked = models.DateTimeField(null=True, blank=True)
     last_error = models.TextField(null=True, blank=True)
@@ -57,6 +57,12 @@ class Feed(models.Model, UrlAttrMixin):
         """Create or update Article objects from entries in last_contents."""
         try:
             feed = feedparser.parse(self.last_contents)
+            if 'feed' in feed and 'title_detail' in feed['feed'] and not self.name:
+                title = feed['feed']['title_detail']
+                if title['type'] != 'text/plain':
+                    # HTML, we should strip tags and unescape
+                    pass
+                self.name = title['value']
             for entry in feed['entries']:
                 try:
                     try:
