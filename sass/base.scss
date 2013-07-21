@@ -309,4 +309,9 @@ ul.status {
         line-height: 1em;
         float: left;
     }
+    &.text button {
+        font-size: 1em;
+        font-weight: bold;
+        color: #333;
+    }
 }

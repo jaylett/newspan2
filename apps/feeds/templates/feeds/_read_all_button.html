@@ -1,2 +1,5 @@
-<form method='POST' action=''>{% csrf_token %}<input type='hidden' name='read' value='true'><button type='submit'>Mark all as read</button></form>
-<form method='POST' action=''>{% csrf_token %}<input type='hidden' name='read' value='false'><button type='submit'>Mark all as unread</button></form>
+<h2 class='assistive-text'>Article list status</h2>
+<ul id='status' class='status text'>
+  <form method='POST' action='' class='read-all'>{% csrf_token %}<input type='hidden' name='read' value='true'><button type='submit'>Mark all as read</button></form>
+  <form method='POST' action='' class='unread-all'>{% csrf_token %}<input type='hidden' name='read' value='false'><button type='submit'>Mark all as unread</button></form>
+</ul>

@@ -38,6 +38,12 @@
         else if ( event.which == 115 ) {    // [s]
             $('ul#status form.starred button').click();
         }
+        else if ( event.which == 65 ) {     // shift+[a]
+            $('ul#status form.read-all button').click();
+        }
+        else if ( event.which == 85 ) {     // shift+[u]
+            $('ul#status form.unread-all button').click();
+        }
         else {
             console.log('key code: ' + event.which);
         }
