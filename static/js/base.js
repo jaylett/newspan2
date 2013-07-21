@@ -107,6 +107,10 @@
 
                 }
             });
+        },
+        gotoAndMarkUnread = function (target) {
+            var target = target || null;
+            nextArticle.submit();
         };
 
 
@@ -114,9 +118,6 @@
 
 
     menu.addClass('hasJs');
-
-    console.log(nextLink);
-
 
 
     topbar.on('click', function (event) {
@@ -132,7 +133,9 @@
             if(menu.hasClass('present')) {
                 menu.removeClass('present');
             } else {
-                window.location.href = nextLink;
+                // console.log('this is called');
+                gotoAndMarkUnread();
+                // window.location.href = nextLink;
             }
         });
     }
@@ -152,6 +155,11 @@
             // $('ul#status form.starred button').click();
             toggleStarred();
         }
+        else if ( event.which == 110 ) {    // [n]
+            // $('ul#status form.starred button').click();
+            gotoAndMarkUnread();
+        }
+
         else if ( event.which == 117 ) {     // [u]
             $('a[rel=parent]').get(0).click();
         }
