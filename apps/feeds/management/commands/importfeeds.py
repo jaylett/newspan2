@@ -1,8 +1,8 @@
 from apps.feeds.models import *
 from django.core.management.base import BaseCommand
-from zipfile import ZipFile
 import urllib2
-from bs4 import BeautifulSoup
+import listparser
+
 
 class Command(BaseCommand):
     
@@ -15,38 +15,21 @@ class Command(BaseCommand):
         return None
 
     def handle(self, *args, **options):
-        filename = args[0]
-
-        zfile = ZipFile(filename)
-
-        exported_feeds_filename = [name for name in zfile.namelist() if self.file_is_an_xml_file(name)][0]
-
-        feed_xml_content = zfile.read(exported_feeds_filename)
-
-        soup = BeautifulSoup(feed_xml_content)
-
-        all_outlines = soup.find_all('outline')
-
-
-
-        for outline in all_outlines:
-            if outline.has_key("type"):
-                if outline["type"] == "rss":
-                    
-                    feed_url = self.get_or_not(outline, "xmlurl")
-                    if feed_url is None:
-                        feed_url = self.get_or_not(outline, "htmlurl")
-                    
-                    title = self.get_or_not(outline, "text")
-
-                    print "%s: %s" % (title, feed_url)
-
-                    if feed_url is not None and title is not None:
-                        print "ok"
-                        feed = Feed.objects.create(name=title, feed_url=feed_url)
-                        feed.save()
-
-            
-
-
-
+        opml_file = open(args[0])
+        opml = listparser.parse( opml_file )
+        
+        for feed in opml.feeds:
+            print "%s: %s" % ( feed.title, feed.url )
+            feed_object = Feed.objects.create(
+                name=feed.title,
+                feed_url=feed.url,
+            )
+            feed_object.save()
+            for tag in feed.tags:
+                # .get_or_create() with a name that begins with a number
+                # (eg. '0-premium') causes .add() to break: "TypeError: int()
+                # argument must be a string or a number, not 'Label'" so
+                # we fetch the label again. Le sigh.
+                label = Label.objects.get_or_create(name=tag)
+                label = Label.objects.get(name=tag)
+                feed_object.labels.add(label)
