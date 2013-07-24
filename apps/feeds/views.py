@@ -5,12 +5,17 @@ from django.views.generic import DetailView, ListView
 from apps.feeds.models import *
 
 
+def get_next_unread_article():
+    return Article.objects.filter(unread=True)[0]
+
+
 class LabelList(ListView):
     model = Label
 
     def get_context_data(self, **kwargs):
         context = {
             'unlabelled_feeds': Feed.objects.filter(labels__pk__isnull=True),
+            'next_article': get_next_unread_article(),
         }
         context.update(kwargs)
         return super(LabelList, self).get_context_data(**context)
