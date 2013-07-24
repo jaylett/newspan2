@@ -71,8 +71,6 @@
                     } else {
                         unreadField.val("true");
                     }
-                    // unreadField.val( !unreadField.val() );
-                    console.log( unreadField.val() );
 
                     var disc = (unreadField.val()=="true")?'●':'○';
                     unreadButton.text(disc);
@@ -101,8 +99,6 @@
                     } else {
                         starredField.val("true");
                     }
-                    // starredField.val( !starredField.val() );
-                    console.log( starredField.val() );
 
                     var star = (starredField.val()=="true")?'☆':'★';
                     starredButton.text(star);
@@ -115,7 +111,6 @@
             nextArticle.submit();
         },
         gotoLi = function (dir) {
-            console.log(dir);
             var sel, index, all, current, next;
 
             all = navigableListLi.length;
@@ -155,9 +150,7 @@
             if(menu.hasClass('present')) {
                 menu.removeClass('present');
             } else {
-                // console.log('this is called');
                 gotoAndMarkUnread();
-                // window.location.href = nextLink;
             }
         });
     }
@@ -165,9 +158,6 @@
     // keyboard shortcuts
     // FIXME should be ajaxified
     body.on('keypress', function (event) {
-
-
-        console.log(event.which);
 
 
         if ( event.which == 104 ) {         // [h]
