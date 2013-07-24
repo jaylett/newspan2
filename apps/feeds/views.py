@@ -6,7 +6,10 @@ from apps.feeds.models import *
 
 
 def get_next_unread_article():
-    return Article.objects.filter(unread=True)[0]
+    try:
+        return Article.objects.filter(unread=True)[0]
+    except IndexError:
+        return None
 
 
 class LabelList(ListView):
