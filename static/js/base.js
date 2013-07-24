@@ -48,8 +48,8 @@
         starredButton = $('ul#status form.starred button'),
         nextArticle = $('form.goto'),
         nextLink = window.location.protocol + '//' + window.location.host + nextArticle.attr('action'),
-        feedList = $('#feedlist'),
-        feedListLi = feedList.find('li'),
+        navigableList = $('ol.navigable, ul.navigable'),
+        navigableListLi = navigableList.find('li'),
         toggleUnread = function () {
             $.ajaxSetup({
                 crossDomain: false, // obviates need for sameOrigin test
@@ -118,37 +118,29 @@
             console.log(dir);
             var sel, index, all, current, next;
 
-            all = feedListLi.length;
-
-
-            // feedListLi.eq(0).addClass('sel');
+            all = navigableListLi.length;
             index = 0;
-            sel = feedList.find('li.sel');
-
-
+            sel = navigableList.find('li.sel');
 
             if(sel.length>0) {
-                current = feedListLi.index(sel);
-
+                current = navigableListLi.index(sel);
                 next = ( (current + dir) + all ) % all;
-                console.log(next);
-
-                feedListLi.removeClass('sel').eq(next).addClass('sel');
-
-                // console.log(feedListLi.index(sel));
+                navigableListLi.removeClass('sel').eq(next).addClass('sel');
             } else {
-                feedListLi.removeClass('sel').eq(0).addClass('sel');
+                navigableListLi.removeClass('sel').eq(0).addClass('sel');
             }
-
+            $('body').scrollTop(navigableList.find('li.sel').offset().top - 50);
         };
-
-
-
-    // gotoLi(1);
-
 
     menu.addClass('hasJs');
 
+    $('#feedlist li').bind('activate', function() {
+        $(this).find('a').get(0).click();
+    });
+
+    $('#article-list li').bind('activate', function() {
+        $(this).find('form.goto').get(0).submit();
+    });
 
     topbar.on('click', function (event) {
         event.preventDefault();
@@ -226,8 +218,7 @@
             $('#stream-all').get(0).click();
         }
         else if ( event.which == 13 ) {     // [return]
-            console.log('this is called');
-            $('#feedlist li.sel a').get(0).click();
+            navigableList.find('li.sel').trigger('activate');
         }
     });
 

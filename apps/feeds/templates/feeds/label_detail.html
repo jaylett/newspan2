@@ -10,7 +10,7 @@
 {% include "feeds/_read_all_button.html" %}
 {% include "feeds/_stream_filter_buttons.html" %}
 
-<ol id="article-list">
+<ol class='navigable' id="article-list">
   {% for article in object_list %}
     <li class="{% if article.unread %} unread{% endif %}{% if article.starred %} starred{% endif %}">
       {% include "feeds/_article_unread_button.html" %}

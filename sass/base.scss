@@ -196,6 +196,12 @@ h2 {
             border-bottom: none;
         }
 
+        &.sel {
+            > form.goto button {
+                font-weight: bold;
+            }
+        }
+
         button {
             background: transparent;
             border: none;
@@ -209,8 +215,11 @@ h2 {
             padding-bottom: 1em;
             margin-bottom: 0.5em;
         }
+        form.goto button {
+            font-style: italic;
+        }
         &.unread form.goto button {
-            font-weight: bold;
+            font-style: normal;
         }
         form.article button {
             float: left;
@@ -266,9 +275,10 @@ iframe, img {
     list-style-type: none;
     counter-reset: feedlist;
     li {
-        &.sel > a {
-            // border: 1px solid black;
-            font-weight: bold;
+        &.sel {
+            > a {
+                font-weight: bold;
+            }
         }
     }
     &>li {
