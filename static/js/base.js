@@ -179,7 +179,7 @@
 
 
         if ( event.which == 104 ) {         // [h]
-            $('a[rel=top]').get(0).click();
+            $('a[rel~=top]').get(0).click();
         }
         else if ( event.which == 106 ) {    // [j]
             // $('ul#status form.unread button').click();
@@ -205,7 +205,7 @@
         }
 
         else if ( event.which == 117 ) {     // [u]
-            $('a[rel=parent]').get(0).click();
+            $('a[rel~=parent]').get(0).click();
         }
         else if ( event.which == 118 ) {     // [v]
             $('a.original-link').get(0).click();

@@ -21,7 +21,7 @@
 </div>
 <div id="menu">
   <ul>
-    <li><a rel='top' href="{% url 'home' %}">Home</a></li>
+    <li><a rel='top{% block extra-home-rel-types %}{% endblock %}' href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
     {% if base_url and base_url != request.get_full_path %}
       <li><a rel="parent" class="backone" href="{{ base_url }}">Back to Article List</a></li>
