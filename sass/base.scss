@@ -229,6 +229,26 @@ h2 {
     }
 }
 
+
+#login-form {
+    label, input {
+        width: 90%;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+    }
+    label {
+        display: block;
+        margin-top: 1em;
+    }
+    button {
+        width: 90%;
+        margin: 1em auto 0;
+        display: block;
+    }
+}
+
+
 // Begin mobile
 
 iframe, img {
@@ -368,6 +388,16 @@ iframe, img {
         padding-top: 50px;
         // margin-top: 50px;
     }
+
+    #login-form {
+        label, input {
+            width: 50%;
+        }
+        button {
+            width: 25%;
+        }
+    }
+
 }
 
 @media only screen and (min-widht: 768px) and (min-height: 650px) {

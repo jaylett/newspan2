@@ -154,3 +154,6 @@ if 'true' == os.environ.get('FULLY_SECURE'):
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https") # Heroku sends this
     CSRF_COOKIE_SECURE = True
     CSRF_COOKIE_HTTPONLY = True # coming in 1.6
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
