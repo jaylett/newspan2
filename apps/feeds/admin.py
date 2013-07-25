@@ -9,6 +9,11 @@ class LabelAdmin(admin.ModelAdmin):
     
 class FeedAdmin(admin.ModelAdmin):
     model = Feed
+    list_display = ['name', 'last_updated', 'all_labels']
+    list_filter = ['labels']
+
+    def all_labels(self, feed):
+        return u", ".join(l.name for l in feed.labels.all())
 
 
 class ArticleAdmin(admin.ModelAdmin):
