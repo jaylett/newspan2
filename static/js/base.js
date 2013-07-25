@@ -46,8 +46,7 @@
         starredField = $('ul#status form.starred input[name="starred"]'),
         unreadButton = $('ul#status form.unread button'),
         starredButton = $('ul#status form.starred button'),
-        nextArticle = $('form.goto'),
-        nextLink = window.location.protocol + '//' + window.location.host + nextArticle.attr('action'),
+        nextArticle = $('form.goto').get(0),
         navigableList = $('ol.navigable, ul.navigable'),
         navigableListLi = navigableList.find('li'),
         toggleUnread = function () {
