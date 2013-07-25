@@ -131,10 +131,12 @@
 
     $('#feedlist li').bind('activate', function() {
         $(this).find('a').get(0).click();
+        return false;
     });
 
     $('#article-list li').bind('activate', function() {
         $(this).find('form.goto').get(0).submit();
+        return false;
     });
 
     topbar.on('click', function (event) {
