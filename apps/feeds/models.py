@@ -2,6 +2,7 @@ from datetime import datetime
 import feedparser
 import json
 import time
+import urllib2
 from django.db import models
 from django.utils import timezone
 from django.utils.safestring import mark_safe
@@ -53,6 +54,35 @@ class Feed(models.Model, UrlAttrMixin):
         else:
             return []
 
+    def update(self):
+        self.last_checked = timezone.now()
+        try:
+            response = urllib2.urlopen(self.feed_url)
+            charset = 'utf8' # sensible default
+            ctype_bits = response.info().get('content-type', 'text/xml').split(';')
+            if len(ctype_bits) > 1:
+                args = dict([s.lower() for s in kv.split('=')] for kv in ctype_bits[1:])
+                charset = args.get('charset', charset)
+            else:
+                pass
+            contents = response.read()
+            import ipdb; ipdb.set_trace()
+            try:
+                contents = contents.decode(charset)
+            except UnicodeDecodeError:
+                try:
+                    contents = contents.decode('utf8')
+                except UnicodeDecodeError:
+                    contents = contents.decode('iso-8859-1')
+            self.last_contents = contents
+            self._make_articles()
+        except Exception as e:
+            self.last_error = str(e)
+            print u"%s failed to update: %s" % (self.name, str(e))
+        finally:
+            self.save()
+        
+
     def _make_articles(self):
         """Create or update Article objects from entries in last_contents."""
         try:
@@ -65,10 +95,17 @@ class Feed(models.Model, UrlAttrMixin):
                 self.name = title['value']
             for entry in feed['entries']:
                 try:
+                    guid = entry.get('id')
+                    if guid is None:
+                        #print "Hmm, no guid for this entry?\n%s" % str(entry)
+                        guid = entry.get('link')
+                    if guid is None:
+                        # nothing we can reasonably do
+                        continue
                     try:
-                        article = Article.objects.get(guid=entry['id'])
+                        article = Article.objects.get(guid=guid)
                     except Article.DoesNotExist:
-                        article = Article(guid=entry['id'], feed=self)
+                        article = Article(guid=guid, feed=self)
                     published = entry.get('published_parsed', None)
                     updated = entry.get('updated_parsed', None)
                     if not updated:
@@ -79,6 +116,10 @@ class Feed(models.Model, UrlAttrMixin):
                         article.updated = datetime.fromtimestamp(time.mktime(updated), timezone.utc)
                     if published:
                         article.published = datetime.fromtimestamp(time.mktime(published), timezone.utc)
+                    elif article.id is None:
+                        # make it now!
+                        article.published = timezone.now()
+                        #print "Hmm, no published date for this entry from %s?\n%s" % (self.name, str(entry))
                     if 'published_parsed' in entry:
                         del entry['published_parsed']
                     if 'updated_parsed' in entry:
