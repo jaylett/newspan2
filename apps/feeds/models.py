@@ -79,7 +79,6 @@ class Feed(models.Model, UrlAttrMixin, ArticleCountingMixin):
             else:
                 pass
             contents = response.read()
-            import ipdb; ipdb.set_trace()
             try:
                 contents = contents.decode(charset)
             except UnicodeDecodeError:
