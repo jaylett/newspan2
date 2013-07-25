@@ -184,6 +184,15 @@ h2 {
     text-align: center;
 }
 
+.unread-count {
+    float: right;
+
+    i {
+        position: absolute;
+        left: -9999px;
+    }
+}
+
 #article-list {
     list-style-type: none;
     margin: 0;
@@ -275,6 +284,7 @@ iframe, img {
     list-style-type: none;
     counter-reset: feedlist;
     li {
+        position: relative;
         &.sel {
             > a {
                 font-weight: bold;

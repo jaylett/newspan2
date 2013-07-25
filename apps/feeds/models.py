@@ -13,8 +13,21 @@ from lib.urlattr import UrlAttr, UrlAttrMixin
 feedparser._HTMLSanitizer.acceptable_elements.add('iframe')
 
 
-class Label(models.Model, UrlAttrMixin):
+class ArticleCountingMixin(object):
+
+    def unread_articles(self):
+        return self.articles.filter(unread=True)
+
+    def starred_articles(self):
+        return self.articles.filter(starred=True)
+
+
+class Label(models.Model, UrlAttrMixin, ArticleCountingMixin):
     name = models.CharField(max_length=128)
+
+    @property
+    def articles(self):
+        return Article.objects.filter(feed__labels=self).distinct()
 
     url = UrlAttr(
         default='label-detail=',
@@ -24,7 +37,7 @@ class Label(models.Model, UrlAttrMixin):
         return self.name
 
 
-class Feed(models.Model, UrlAttrMixin):
+class Feed(models.Model, UrlAttrMixin, ArticleCountingMixin):
     name = models.TextField(blank=True)
     feed_url = models.URLField(max_length=1024, db_column='url')
     last_updated = models.DateTimeField(null=True, blank=True)

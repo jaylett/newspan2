@@ -3,20 +3,20 @@
 {% block page-title %}Your labels, sir{% endblock %}
 
 {% block content %}
-<h1>All your labels (and unlabelled feeds)</h1>
+<h1>All your feeds</h1>
 
 <ol class='navigable' id="feedlist">
     {% for label in object_list %}
-        <li><a href='{{ label.url }}'>{{ label.name }}</a>
+        <li><a href='{{ label.url }}'>{{ label.name }} <span class='unread-count'>{{ label.unread_articles.count }}<i> unread</i> / {{ label.articles.count }}</span></a>
             <ol>
                 {% for feed in label.feeds.all %}
-                    <li><a href='{{ feed.url }}'>{{ feed.name }}</a></li>
+                    <li><a href='{{ feed.url }}'>{{ feed.name }} <span class='unread-count'>{{ feed.unread_articles.count }}<i> unread</i> / {{ feed.articles.count }}</span></a></li>
                 {% endfor %}
             </ol>
         </li>
     {% endfor %}
     {% for feed in unlabelled_feeds %}
-        <li><a href='{{ feed.url }}'>{{ feed.name }}</a></li>
+        <li><a href='{{ feed.url }}'>{{ feed.name }} <span class='unread-count'>{{ feed.unread_articles.count }}<i> unread</i> / {{ feed.articles.count }}</span></a></li>
     {% endfor %}
 </ol>
 
