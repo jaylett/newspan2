@@ -124,7 +124,20 @@
             } else {
                 navigableListLi.removeClass('sel').eq(0).addClass('sel');
             }
-            $('body').scrollTop(navigableList.find('li.sel').offset().top - 50);
+            function scroll_to(ele) {
+                ele_top = ele.offset().top;
+                ele_height = ele.find('> *').get(0).offsetHeight;
+                ele_bottom = ele_top + ele_height;
+                viewport_top = $('body').scrollTop();
+                viewport_bottom = viewport_top + $('html').get(0).offsetHeight;
+                //console.log([ele_top, ele_height, ele_bottom, viewport_top, viewport_bottom]);
+
+                if (ele_top < viewport_top || ele_bottom > viewport_bottom) {
+                    $('body').scrollTop(navigableList.find('li.sel').offset().top - 50);
+                }
+            }
+
+            scroll_to(navigableList.find('li.sel'));
         };
 
     menu.addClass('hasJs');
