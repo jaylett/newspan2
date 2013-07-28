@@ -397,6 +397,15 @@ iframe, img {
 }
 
 
+.body {
+    @include basegrid(16px);
+
+    blockquote {
+        background-color: #ccc;
+        padding: 5px 20px;
+    }
+}
+
 // Begin tablet up
 @media only screen and (min-width: 768px) {
     body {
