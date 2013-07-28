@@ -96,6 +96,11 @@ p {
 h1 {
     @include basegrid(36px);
     text-align: center;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 h2 {
