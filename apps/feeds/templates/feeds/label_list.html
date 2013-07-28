@@ -10,13 +10,17 @@
         <li><a href='{{ label.url }}'>{{ label.name }} <span class='unread-count'>{{ label.unread_articles.count }}<i> unread</i> / {{ label.articles.count }}</span></a>
             <ol>
                 {% for feed in label.feeds.all %}
-                    <li><a href='{{ feed.url }}'>{{ feed.name }} <span class='unread-count'>{{ feed.unread_articles.count }}<i> unread</i> / {{ feed.articles.count }}</span></a></li>
+                    {% if feed.unread_articles.count %}
+                      <li><a href='{{ feed.url }}'>{{ feed.name }} <span class='unread-count'>{{ feed.unread_articles.count }}<i> unread</i> / {{ feed.articles.count }}</span></a></li>
+                    {% endif %}
                 {% endfor %}
             </ol>
         </li>
     {% endfor %}
     {% for feed in unlabelled_feeds %}
-        <li><a href='{{ feed.url }}'>{{ feed.name }} <span class='unread-count'>{{ feed.unread_articles.count }}<i> unread</i> / {{ feed.articles.count }}</span></a></li>
+        {% if feed.unread_articles.count %}
+          <li><a href='{{ feed.url }}'>{{ feed.name }} <span class='unread-count'>{{ feed.unread_articles.count }}<i> unread</i> / {{ feed.articles.count }}</span></a></li>
+        {% endif %}
     {% endfor %}
 </ol>
 
