@@ -6,7 +6,7 @@
 <h1 class="article-title"><a class='original-link' target='_blank' href='{{ article.link }}'>{{ article.title }}</a></h1>
 
 {% if article.authors|length %}
-<p class='byline'>by
+<p class='byline'>
 {% for author in article.authors %}
 {% if author.href %}{% if not forloop.first %}{% if forloop.last %}and{% else %},{% endif %} {% endif %}<a href='{{ author.href }}'>{{ author.name }}</a>{% else %}{{ author.name }}{% endif %}
 {% endfor %}
