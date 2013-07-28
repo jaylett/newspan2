@@ -286,6 +286,11 @@ iframe, img {
     display: block;
 }
 
+iframe.newspan {
+    width: 100% !important;
+    height: 500px !important;
+}
+
 .feedflare img {
     display: inline;
 }
@@ -411,6 +416,9 @@ iframe, img {
     body {
         // background: green;
         max-width: 688px; // 768 -80 px
+    }
+    body.force-wide {
+        max-width: none;
     }
     #topbar {
         .unread {
