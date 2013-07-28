@@ -172,9 +172,16 @@
     // keyboard shortcuts
     // FIXME should be ajaxified
     body.on('keypress', function (event) {
-
-
-        if ( event.which == 104 ) {         // [h]
+        if ( event.which == 101 ) {         // [e]
+            var bodies = $('div.body');
+            if (bodies.length) {
+                var src = $('h1 > a').attr('href');
+                var iframe = $("<iframe class='newspan' src='" + src + "'></iframe>");
+                $('div.body').replaceWith(iframe);
+                $('body').addClass('force-wide');
+            }
+        }
+        else if ( event.which == 104 ) {    // [h]
             $('a[rel~=top]').get(0).click();
         }
         else if ( event.which == 106 ) {    // [j]
