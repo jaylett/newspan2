@@ -22,7 +22,7 @@ DEBUG = 'true' == os.environ.get('DJANGO_DEBUG', 'true')
 if DEBUG:
     SECRET_KEY = 'c!(2^req8@_$%kmq0g+&!%o770&vqlq&i6q@i(pixfewph^18w'
 else:
-    SECRET_KEY = env.get('DJANGO_SECRET_KEY')
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 TEMPLATE_DEBUG = True
 
