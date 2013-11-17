@@ -19,6 +19,7 @@ With the demise of Google Reader, everyone is making RSS readers that suck a lit
  * AWS_STORAGE_BUCKET_NAME
  * FULLY_SECURE=true # plus enable SSL and certs:add
  * labs:enable user-env-compile
+ * addons:add scheduler (and run python manage.py fetchfeeds regularly)
 
 ## The team
 
