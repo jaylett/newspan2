@@ -9,7 +9,7 @@ With the demise of Google Reader, everyone is making RSS readers that suck a lit
  * keyboard shortcuts and touch gestures
  * Heroku compatible
 
-## Environment variables for Heroku
+## Environment variables and other configuration for Heroku
 
  * DJANGO_SECRET_KEY=something secret
  * DJANGO_DEBUG=false
@@ -18,6 +18,8 @@ With the demise of Google Reader, everyone is making RSS readers that suck a lit
  * AWS_SECRET_ACCESS_KEY
  * AWS_STORAGE_BUCKET_NAME
  * FULLY_SECURE=true # plus enable SSL and certs:add
+ * labs:enable user-env-compile
+ * addons:add scheduler (and run python manage.py fetchfeeds regularly)
 
 ## The team
 
